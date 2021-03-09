@@ -24,6 +24,12 @@ class PermissionsRepository implements IPermissionsRepository {
   public async save(permission: Permission): Promise<Permission> {
       return this.ormRepository.save(permission);
   }
+
+  public async findPermissionById(id: number): Promise<Permission | undefined> {
+    const permission = await this.ormRepository.findOne({ where: { id } });
+
+    return permission;
+  }
 }
 
 export default PermissionsRepository;

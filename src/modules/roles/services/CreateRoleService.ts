@@ -12,7 +12,7 @@ interface IRequest {
 class CreateRoleService {
   constructor(
     @inject('RolesReposiroty')
-    private rolesReposiroty: IRolesRepository,
+    private rolesRepository: IRolesRepository,
   ) {}
 
   public async execute({ name }: IRequest): Promise<Role> {
@@ -20,13 +20,9 @@ class CreateRoleService {
       throw new AppError('Required fields not informed');
     }
 
-    const permissions = await this.rolesReposiroty.create({ name });
+    const roles = await this.rolesRepository.create({ name });
 
-    if (!permissions) {
-      throw new AppError('Error when registering a new role');
-    }
-
-    return permissions;
+    return roles;
   }
 }
 

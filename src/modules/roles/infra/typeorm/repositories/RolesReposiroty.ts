@@ -24,6 +24,12 @@ class RolesRepository implements IRolesRepository {
   public async save(role: Role): Promise<Role> {
       return this.ormRepository.save(role);
   }
+
+  public async findRoleById(id: number): Promise<Role | undefined> {
+    const role = await this.ormRepository.findOne({ where: { id } });
+
+    return role;
+  }
 }
 
 export default RolesRepository;

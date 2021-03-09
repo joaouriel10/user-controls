@@ -23,10 +23,6 @@ class CreatePermissionService {
 
     const permissions = await this.permissionsReposiroty.create({ name, permission });
 
-    if (!permissions) {
-      throw new AppError('Error when registering a new permission');
-    }
-
     return permissions;
   }
 }
