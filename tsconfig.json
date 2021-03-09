@@ -1,17 +1,19 @@
 {
-   "compilerOptions": {
-      "lib": [
-         "es5",
-         "es6"
-      ],
-      "target": "es5",
-      "module": "commonjs",
-      "moduleResolution": "node",
-      "outDir": "./build",
-      "emitDecoratorMetadata": true,
-      "experimentalDecorators": true,
-      "sourceMap": true,
-      "skipLibCheck": true,
-      "forceConsistentCasingInFileNames": true
-   }
+  "compilerOptions": {
+    "target": "es5",   
+    "module": "CommonJS",                      
+    "outDir": "./dist",   
+    "rootDir": "./src",                     
+    "strict": true,                           
+    "strictPropertyInitialization": false,  
+    "baseUrl": "./src",                       
+    "paths": {
+      "@modules/*": ["modules/*"],
+      "@shared/*": ["shared/*"]
+    },                    
+    "esModuleInterop": true,                  
+    "experimentalDecorators": true,        
+    "emitDecoratorMetadata": true,                       
+    "forceConsistentCasingInFileNames": true  
+  }
 }
