@@ -1,11 +1,11 @@
 import { Router } from 'express';
 
-import roleRouter from '@modules/roles/infra/http/routes/roles.routes';
-import permissionRouter from '@modules/permissions/infra/http/routes/permissions.routes';
+import CreateUserControler from '@modules/users/infra/http/CreateUserControler';
 
-const routes = Router();
+const router = Router();
 
-routes.use('/roles', roleRouter);
-routes.use('/permissions', permissionRouter);
+const createUserControler = new CreateUserControler();
 
-export default routes;
+router.post('/', createUserControler.execute);
+
+export default router;

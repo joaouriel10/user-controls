@@ -1,10 +1,8 @@
 import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, ManyToOne, JoinColumn } from 'typeorm';
 
-import Role from '@modules/roles/infra/typeorm/entities/Role';
-
 @Entity('users')
 class User {
-  @PrimaryGeneratedColumn('increment')
+  @PrimaryGeneratedColumn('uuid')
   id: number;
 
   @Column()
@@ -15,13 +13,6 @@ class User {
 
   @Column()
   password: string;
-
-  @ManyToOne(() => Role)
-  @JoinColumn({ name: 'role_id' })
-  Role: Role;
-
-  @Column()
-  role_id: number;
 
   @CreateDateColumn()
   created_at: Date;

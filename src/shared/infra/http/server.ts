@@ -4,16 +4,16 @@ import 'express-async-errors';
 import express, { Request, Response, NextFunction } from 'express';
 
 import AppError from '@shared/errors/AppError';
-import routes from './routes';
 
-import '@shared/infra/typeorm'
-import '@shared/container';
+import { consumeMessage, coonectKafka } from "@shared/infra/kafka";
+
+import routes from './routes';
+import '../typeorm';
 
 const app = express();
 
 app.use(express.json());
 app.use(routes);
-
 
 app.use((err: Error, request: Request, response: Response, next: NextFunction) => {
   if (err instanceof AppError) {
@@ -31,6 +31,13 @@ app.use((err: Error, request: Request, response: Response, next: NextFunction) =
   })
 });
 
-app.listen(3333, () => {
-  console.log('🚀 Server started on port 3333!');
-});
+async function run() {
+  await coonectKafka();
+  await consumeMessage();
+
+  app.listen(3333, () => {
+    console.log('🚀 Server started on port 3333!');
+  });
+}
+
+run().catch(console.error)
